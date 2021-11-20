@@ -97,6 +97,33 @@ function update(data, type){
     .attr("transform", "rotate(-90)")
     .text(type);
 
+    svg
+      .selectAll(".axis")
+      .attr("aria-hidden", true);
+
+    svg
+      .selectAll(".bar")
+      .attr("role", "graphics-symbol")
+      .attr("aria-roledescription", "bar element")
+      .attr("tabindex", 0)
+      .attr("aria-label", d => {
+        return type == "stores"
+          ? `${d.company} has ${d.stores} stores nation wide'`
+          : `${d.company} makes ${d.revenue} billion dollars per year'`;
+      });
+
+    svg
+      .select(".chart")
+      .select("svg")
+      .attr("role", "graphics-document")
+      .attr("aria-roledescription", "bar chart");
+        svg.attr("tabindex", 0);
+        svg.attr("aria-label",
+        type == "stores"
+        ? "Bar chart showing the numeber of coffee shop locations per parent company in the United States. Starbucks is far an away the leader with over 20 thousand locations. Starbucks is followed by Dunkin Brands and Tim Hortons respectively."
+        : "Bar chart showing the annual revenue of each parent company in billions of dollars. Starbucks is once again the significant leader. Panera has a lower proportion of stores nation wide but a higher revenue than the Dunkin Brands."
+    );
+
 }
 
 // ----Load Dataset----
